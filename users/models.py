@@ -3,7 +3,7 @@ from orm import db
 
 class User(db.Model):
     __table__name = 'users'
-    id = db.Column(db.String, primary_key=True, auto_increment=True)
+    id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String())
 
     def save(self):
