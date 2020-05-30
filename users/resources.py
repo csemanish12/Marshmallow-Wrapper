@@ -15,7 +15,13 @@ class UserResource(Resource):
 
     @classmethod
     def post(cls):
-        data = UserSchema().load(request.json, session=db.session)
+        # using marshmallow 3
+        # data = UserSchema().load(request.json, session=db.session)
+        # user = create_user(data)
+        # serialized_data = UserSchema().dump(user)
+
+        # using marshmallow 2
+        data, errors = UserSchema(strict=True).load(request.json, session=db.session)
         user = create_user(data)
-        serialized_data = UserSchema().dump(user)
+        serialized_data, error = UserSchema().dump(user)
         return serialized_data
